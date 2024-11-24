@@ -3,13 +3,18 @@ package com.example.rupizzeria_app_project4;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -32,32 +37,69 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
 
         //setup B-role screen
         setupBRoleVideo(findViewById(R.id.pizzaB_Role));
+        //What happens when you click the OrderNow button
+        showPizzaMenuOptions(findViewById(R.id.ordersButton));
+        //What happens when you click the Back button
+        resetMainMenu(findViewById(R.id.back_button));
+        //What happens when you click the New York Pizza button
 
-
-        //Button creation and setOnclickListeners must be declared in the onCreate method.
-//        Button JButton = findViewById(R.id.Jovonte);
-//        JButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(RUPizzeriaMainMenu.this, "HOWDY!!!", Toast.LENGTH_LONG).show();
-//
-//                //make a new intent to go to the NewYorkPizza activity
-//                Intent intent = new Intent(RUPizzeriaMainMenu.this, NewYorkPizza.class);
-//
-//                startActivity(intent);
-//            }
-//
-//
-//        });
+        //What happens when you click the Chicago Pizza button
     }
 
     /**
-     * Simple test method for displaying a Toast window.
-     * @param view I dunno its just a button man
+     * Method will reset the main menu to its original state.
+     * Hiding the back button, shifting the title, and hiding the cart button
+     * @param view the view containing the back button
      */
-    public void buttonCLICKED(View view) {
-        Toast.makeText(this, "Button clicked!", Toast.LENGTH_LONG).show();
+    public void resetMainMenu(View view) {
+        ImageButton backButton = (ImageButton)view;
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Set the visibility of the main menu buttons
+                findViewById(R.id.orderNewYorkButton).setVisibility(View.INVISIBLE);
+                findViewById(R.id.orderChicagoButton).setVisibility(View.INVISIBLE);
+                findViewById(R.id.cart_button).setVisibility(View.INVISIBLE);
+                findViewById(R.id.back_button).setVisibility(View.INVISIBLE);
+                findViewById(R.id.orderHistoryButton).setVisibility(View.VISIBLE);
+                findViewById(R.id.ordersButton).setVisibility(View.VISIBLE);
+                //move the title back to the left
+                Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams)
+                        findViewById(R.id.mainMenuToolbar_title).getLayoutParams();
+                layoutParams.gravity = Gravity.START;
+                findViewById(R.id.mainMenuToolbar_title).setLayoutParams(layoutParams);
+            }
+                                      });
     }
+
+    /**
+     * Method will set the visuals of the main menu to the
+     * two options for ordering pizza
+     * @param view the view containing the order button
+     */
+    public void showPizzaMenuOptions(View view) {
+        Button OrderNowButton = (Button)view;
+        OrderNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Set the visibility of the main menu buttons
+                OrderNowButton.setVisibility(View.INVISIBLE);
+                findViewById(R.id.orderHistoryButton).setVisibility(View.INVISIBLE);
+                findViewById(R.id.orderNewYorkButton).setVisibility(View.VISIBLE);
+                findViewById(R.id.orderChicagoButton).setVisibility(View.VISIBLE);
+                findViewById(R.id.cart_button).setVisibility(View.VISIBLE);
+                findViewById(R.id.back_button).setVisibility(View.VISIBLE);
+
+                //change the layout parameters of the toolbar title
+                Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams)
+                        findViewById(R.id.mainMenuToolbar_title).getLayoutParams();
+                layoutParams.gravity = android.view.Gravity.CENTER;
+                findViewById(R.id.mainMenuToolbar_title).setLayoutParams(layoutParams);
+
+            }
+        });
+    }
+
 
     /**
      * Method to grab the video and display it in the background of the
@@ -74,4 +116,13 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         //start the video
         pizzaBROLE.start();
     }
+
+
+    /**
+     //     * Simple test method for displaying a Toast window.
+     //     * @param view I dunno its just a button man
+     //     */
+//    public void buttonCLICKED(View view) {
+//        Toast.makeText(this, "Button clicked!", Toast.LENGTH_LONG).show();
+//    }
 }
