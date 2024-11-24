@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RUPizzeria-APP_Project4</string>
+    <string name="orders_button">Order Now!!</string>
+    <string name="order_history_button">Previous Orders</string>
+    <string name="new_york_pizza">New York Pizza</string>
+    <string name="chicago_pizza">Chicago Pizza</string>
 </resources>

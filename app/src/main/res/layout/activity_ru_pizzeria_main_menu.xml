@@ -7,18 +7,57 @@
     android:layout_height="match_parent"
     tools:context=".RUPizzeriaMainMenu">
 
-    <TextView
-        android:layout_width="134dp"
-        android:layout_height="89dp"
-        android:rotationX="23"
-        android:text="Hello World!!!!"
-        android:textAlignment="center"
-        android:textSize="34sp"
+    <VideoView
+        android:id="@+id/pizzaB_Role"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        />
+
+    <Button
+        android:id="@+id/ordersButton"
+        android:layout_width="344dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="#B90E0E"
+        android:ellipsize="end"
+        android:text="@string/orders_button"
+        android:textSize="22sp"
+        app:icon="@drawable/shopping_cart"
+        app:iconSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderHistoryButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/orderHistoryButton"
+        android:layout_width="344dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="224dp"
+        android:backgroundTint="#B90E0E"
+        android:ellipsize="end"
+        android:text="@string/order_history_button"
+        android:textSize="22sp"
+        app:icon="@drawable/pizzaboxstack"
+        app:iconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintTop_toBottomOf="@+id/ordersButton" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        app:srcCompat="@drawable/shopping_cart"
+        tools:layout_editor_absoluteX="355dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
