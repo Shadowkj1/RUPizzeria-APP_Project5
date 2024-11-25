@@ -41,10 +41,43 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         showPizzaMenuOptions(findViewById(R.id.ordersButton));
         //What happens when you click the Back button
         resetMainMenu(findViewById(R.id.back_button));
-        //What happens when you click the New York Pizza button
-
         //What happens when you click the Chicago Pizza button
+        sendUserToChicagoPizza(findViewById(R.id.orderChicagoButton));
+        //What happens when you click the New York Pizza button
+        sendUserToNewYorkPizza(findViewById(R.id.orderNewYorkButton));
+
     }
+
+    /**
+     * Method to send the user to the Chicago Pizza menu
+     * @param view the view containing the Chicago Pizza button
+     */
+    public void sendUserToChicagoPizza(View view) {
+        Button chicagoButton = (Button)view;
+        chicagoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RUPizzeriaMainMenu.this, ChicagoPizza.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Method to send the user to the New York Pizza menu
+     * @param view the view containing the New York Pizza button
+     */
+    public void sendUserToNewYorkPizza(View view) {
+        Button newYorkButton = (Button)view;
+        newYorkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RUPizzeriaMainMenu.this, NewYorkPizza.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 
     /**
      * Method will reset the main menu to its original state.

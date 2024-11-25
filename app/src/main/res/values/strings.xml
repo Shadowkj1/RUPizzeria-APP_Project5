@@ -7,4 +7,10 @@
     <string name="pizzeria_name">RUPizzeria</string>
     <string name="shopping_cart">Shopping Cart</string>
     <string name="back_button">Back</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_york_pizza_gallery">New York Pizza Options!</string>
+    <string name="new_york_deluxe">New York Deluxe Pizza</string>
+    <string name="new_york_meatzza">New York Meatzza Pizza</string>
+    <string name="new_york_bbq">New York BBQ Chicken Pizza</string>
+    <string name="new_york_buildyourown">New York Build Your Own Pizza</string>
 </resources>
