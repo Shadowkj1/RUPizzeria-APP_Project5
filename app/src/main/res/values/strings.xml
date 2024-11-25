@@ -13,4 +13,6 @@
     <string name="new_york_meatzza">New York Meatzza Pizza</string>
     <string name="new_york_bbq">New York BBQ Chicken Pizza</string>
     <string name="new_york_buildyourown">New York Build Your Own Pizza</string>
+    <string name="temp_Pizza_name">New York Deluxe Pizza</string>
+    <string name="temp_crust_name">Thin</string>
 </resources>
