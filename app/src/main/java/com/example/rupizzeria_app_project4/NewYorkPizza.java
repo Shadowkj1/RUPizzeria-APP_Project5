@@ -16,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.chip.Chip;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -44,7 +46,7 @@ public class NewYorkPizza extends AppCompatActivity {
         //when the user selects a pizza type
         pizzaTypeChanged(findViewById(R.id.spinner_newYorkPizzaType));
         //When the user selects a pizza size
-        pizzaSizeChanged();
+        pizzaSizeChanged(findViewById(R.id.spinner_pizzaSize));
     }
 
     /**
@@ -178,56 +180,143 @@ public class NewYorkPizza extends AppCompatActivity {
 
     /**
      * Enables all toppings and allows user to select toppings.
-     * but only to a limit of 7!
+     * Dynamically adjusts the price as toppings are added or removed, up to 7 toppings.
      */
     public void buildYourOwnPizzaSelectionsOnly() {
         setToppingsState(new int[]{
                 R.id.toppingsChip_Sausage, R.id.toppingsChip_Pepperoni,
                 R.id.toppingsChip_GreenPeppers, R.id.toppingsChip_Onions,
-                R.id.toppingsChip_Mushrooms,R.id.toppingsChip_BBQChicken,
+                R.id.toppingsChip_Mushrooms, R.id.toppingsChip_BBQChicken,
                 R.id.toppingsChip_Beef, R.id.toppingsChip_Ham,
                 R.id.toppingsChip_Provolone, R.id.toppingsChip_Cheddar
         }, false, true, true);
 
-        //Set the price for the sizes
+        // Set the base price based on size
         Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
+        double basePrice = 0;
         if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
-            setPriceFromType(8.99);
+            basePrice = 8.99;
         } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_medium))) {
-            setPriceFromType(10.99);
+            basePrice = 10.99;
         } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
-            setPriceFromType(12.99);
+            basePrice = 12.99;
         }
+        double finalBasePrice = basePrice; // Final variable for lambda compatibility
+        setPriceFromType(finalBasePrice);
+
+        // Maximum toppings allowed
+        int maxToppings = 6;
 
         ChipGroup toppings = findViewById(R.id.chipGroup_toppings);
-        //I set it to 6 here but you'll get why in a second
-        int maxToppings = 6;
         toppings.setOnCheckedStateChangeListener((group, checkedId) -> {
             if (checkedId.size() > maxToppings) {
-                for (int i=0; i<toppings.getChildCount(); i++) {
+                // Disable unchecked chips if the limit is exceeded
+                for (int i = 0; i < toppings.getChildCount(); i++) {
                     Chip chip = (Chip) toppings.getChildAt(i);
                     if (!chip.isChecked()) {
                         chip.setEnabled(false);
                     }
                 }
-                Toast.makeText(this, "You can only select " + (maxToppings+1)
-                        + " toppings", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You can only select " + (maxToppings+1) + " toppings", Toast.LENGTH_SHORT).show();
             } else {
-                for (int i=0; i<toppings.getChildCount(); i++) {
+                // Re-enable all chips when the limit is no longer exceeded
+                for (int i = 0; i < toppings.getChildCount(); i++) {
                     Chip chip = (Chip) toppings.getChildAt(i);
                     chip.setEnabled(true);
                 }
             }
+
+            // Adjust price dynamically
+            double currentPrice = finalBasePrice + (checkedId.size() * 1.69);
+            setPriceFromType(currentPrice);
         });
     }
+
 
     /**
      * This activates everytime the user selects a pizza size from the spinner
      * @param view This is the view containing the pizzaSize spinner
      */
-    public void pizzaSizeChanged() {
+    public void pizzaSizeChanged(View view) {
         //we should get the pizza size spinner
+
+        Spinner pizzaSize = (Spinner) view;
+        pizzaSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            //looks like I am hardcoding the prices here
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //string holding the pizzatype from the spinner
+                String selectedSize = pizzaSize.getSelectedItem().toString();
+                String selectedPizza = ((Spinner) findViewById(R.id.spinner_newYorkPizzaType))
+                        .getSelectedItem().toString();
+                TextView priceView = findViewById(R.id.textview_pizza_price);
+                if (selectedSize.equals(getString(R.string.pizzaSize_small))) {
+                    priceForSmallPizza(selectedPizza);
+                } else if (selectedSize.equals(getString(R.string.pizzaSize_medium))) {
+                    priceForMediumPizza(selectedPizza);
+                } else if (selectedSize.equals(getString(R.string.pizzaSize_large))) {
+                    priceForLargePizza(selectedPizza);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //do nothing
+            }
+        });
+
     }
+
+
+    /**
+     * if the pizza is large, set the price
+     * @param largePizza the selected pizza size (large)
+     */
+    private void priceForLargePizza(String largePizza) {
+        if (largePizza.equals(getString(R.string.new_york_deluxe))) {
+            setPriceFromType(20.99);
+        } else if (largePizza.equals(getString(R.string.new_york_bbq))) {
+            setPriceFromType(19.99);
+        } else if (largePizza.equals(getString(R.string.new_york_meatzza))) {
+            setPriceFromType(21.99);
+        } else if (largePizza.equals(getString(R.string.new_york_buildyourown))) {
+            setPriceFromType(12.99+grabPriceFromActiveToppings());
+        }
+    }
+
+    /**
+     * if the pizza is small, set the price
+     * @param smallPizza the selected pizza size (small)
+     */
+    private void priceForSmallPizza(String smallPizza) {
+        if (smallPizza.equals(getString(R.string.new_york_deluxe))) {
+            setPriceFromType(16.99);
+        } else if (smallPizza.equals(getString(R.string.new_york_bbq))) {
+            setPriceFromType(14.99);
+        } else if (smallPizza.equals(getString(R.string.new_york_meatzza))) {
+            setPriceFromType(17.99);
+        } else if (smallPizza.equals(getString(R.string.new_york_buildyourown))) {
+            //grab the amount of chips selected from the chipgroup
+            setPriceFromType(8.99+grabPriceFromActiveToppings());
+        }
+    }
+
+    /**
+     * sets the price (text) based on the pizza size changing
+     * @param MediumPizza the selected pizza size (medium)
+     */
+    private void priceForMediumPizza(String MediumPizza) {
+        if (MediumPizza.equals(getString(R.string.new_york_deluxe))) {
+            setPriceFromType(18.99);
+        } else if (MediumPizza.equals(getString(R.string.new_york_bbq))) {
+            setPriceFromType(16.99);
+        } else if (MediumPizza.equals(getString(R.string.new_york_meatzza))) {
+            setPriceFromType(19.99);
+        } else if (MediumPizza.equals(getString(R.string.new_york_buildyourown))) {
+            setPriceFromType(10.99+grabPriceFromActiveToppings());
+        }
+    }
+
 
     /**
      * sets the price (text) based on the pizza type changing
@@ -236,6 +325,16 @@ public class NewYorkPizza extends AppCompatActivity {
     public void setPriceFromType(double price) {
         TextView priceView = findViewById(R.id.textview_pizza_price);
        priceView.setText(String.format(Locale.getDefault(), "$%.2f", price));
+    }
+
+    /**
+     * helper method that grabs the price of the total toppings when switching
+     * from size to size on build your own pizza
+     */
+    private double grabPriceFromActiveToppings(){
+        int selectedChipsCount = ((ChipGroup) findViewById
+                (R.id.chipGroup_toppings)).getCheckedChipIds().size();
+        return selectedChipsCount * 1.69;
     }
 
     /**
