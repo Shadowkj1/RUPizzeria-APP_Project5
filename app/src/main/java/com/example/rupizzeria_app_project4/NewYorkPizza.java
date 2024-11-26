@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import Core.Order;
 import Core.Pizza;
@@ -41,6 +43,8 @@ public class NewYorkPizza extends AppCompatActivity {
 
         //when the user selects a pizza type
         pizzaTypeChanged(findViewById(R.id.spinner_newYorkPizzaType));
+        //When the user selects a pizza size
+        pizzaSizeChanged();
     }
 
     /**
@@ -100,6 +104,15 @@ public class NewYorkPizza extends AppCompatActivity {
         R.id.toppingsChip_Provolone,
         R.id.toppingsChip_Cheddar
     }, false, false, false);
+
+    Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
+    if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
+        setPriceFromType(16.99);
+    } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_medium))) {
+        setPriceFromType(18.99);
+    } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
+        setPriceFromType(20.99);
+    }
 }
 
     /**
@@ -122,6 +135,14 @@ public class NewYorkPizza extends AppCompatActivity {
                 R.id.toppingsChip_Mushrooms,
                 R.id.toppingsChip_Ham
         }, false, false, false);
+        Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
+        if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
+            setPriceFromType(14.99);
+        } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_medium))) {
+            setPriceFromType(16.99);
+        } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
+            setPriceFromType(19.99);
+        }
     }
 
     /**
@@ -145,7 +166,14 @@ public class NewYorkPizza extends AppCompatActivity {
                 R.id.toppingsChip_Cheddar
         }, false, false, false);
 
-
+        Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
+        if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
+            setPriceFromType(17.99);
+        } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_medium))) {
+            setPriceFromType(19.99);
+        } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
+            setPriceFromType(21.99);
+        }
     }
 
     /**
@@ -160,6 +188,16 @@ public class NewYorkPizza extends AppCompatActivity {
                 R.id.toppingsChip_Beef, R.id.toppingsChip_Ham,
                 R.id.toppingsChip_Provolone, R.id.toppingsChip_Cheddar
         }, false, true, true);
+
+        //Set the price for the sizes
+        Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
+        if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
+            setPriceFromType(8.99);
+        } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_medium))) {
+            setPriceFromType(10.99);
+        } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
+            setPriceFromType(12.99);
+        }
 
         ChipGroup toppings = findViewById(R.id.chipGroup_toppings);
         //I set it to 6 here but you'll get why in a second
@@ -181,6 +219,23 @@ public class NewYorkPizza extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * This activates everytime the user selects a pizza size from the spinner
+     * @param view This is the view containing the pizzaSize spinner
+     */
+    public void pizzaSizeChanged() {
+        //we should get the pizza size spinner
+    }
+
+    /**
+     * sets the price (text) based on the pizza type changing
+     * @param price price of the pizza
+     */
+    public void setPriceFromType(double price) {
+        TextView priceView = findViewById(R.id.textview_pizza_price);
+       priceView.setText(String.format(Locale.getDefault(), "$%.2f", price));
     }
 
     /**
