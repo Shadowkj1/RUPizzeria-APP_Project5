@@ -8,7 +8,7 @@
     tools:context=".NewYorkPizzaActivityController">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageview_pizzaImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="72dp"
@@ -187,6 +187,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textview_crustType"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_PIzzaView"
         app:layout_constraintStart_toStartOf="@+id/spinner_newYorkPizzaType" />
 </androidx.constraintlayout.widget.ConstraintLayout>

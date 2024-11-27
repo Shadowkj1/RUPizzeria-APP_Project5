@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -224,21 +225,30 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
                 //string holding the pizzatype from the spinner
                 String selectedPizza = pizzaType.getSelectedItem().toString();
                 TextView crustType = findViewById(R.id.textview_crustType);
+                ImageView pizzaImage = findViewById(R.id.imageview_pizzaImage);
                 if (selectedPizza.equals(getString(R.string.new_york_deluxe))) {
                     //change the crust to Brooklyn
                     crustType.setText(getString(R.string.crust_Brooklyn));
+                    //change the image
+                    pizzaImage.setImageResource(R.drawable.newyorkstyle_deluxe);
                     deluxePizzaSelectionsOnly();
                 } else if (selectedPizza.equals(getString(R.string.new_york_bbq))) {
                     //change the crust to thin
                     crustType.setText(getString(R.string.crust_Thin));
+                    //change the image
+                    pizzaImage.setImageResource(R.drawable.newyorkstyle_bbqchicken);
                     bbqChickenPizzaSelectionsOnly();
                 } else if (selectedPizza.equals(getString(R.string.new_york_meatzza))) {
                     //change the crust to Hand-tossed
                     crustType.setText(getString(R.string.crust_HandTossed));
+                    //change the image
+                    pizzaImage.setImageResource(R.drawable.newyorkstyle_meatzza);
                     meatzzaPizzaSelectionsOnly();
                 } else if (selectedPizza.equals(getString(R.string.new_york_buildyourown))) {
                     //change the crust to Hand-tossed
                     crustType.setText(getString(R.string.crust_HandTossed));
+                    //change the image
+                    pizzaImage.setImageResource(R.drawable.newyorkstyle_buildyourown);
                     buildYourOwnPizzaSelectionsOnly();
                 }
             }
@@ -442,57 +452,6 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
         double totalPrice = currentBasePrice + (selectedToppingCount * toppingPrice);
         setPriceFromType(totalPrice);
     }
-
-
-//    /**
-//     * if the pizza is large, set the price
-//     * @param largePizza the selected pizza size (large)
-//     */
-//    private void priceForLargePizza(String largePizza) {
-//        if (largePizza.equals(getString(R.string.new_york_deluxe))) {
-//            setPriceFromType(20.99);
-//        } else if (largePizza.equals(getString(R.string.new_york_bbq))) {
-//            setPriceFromType(19.99);
-//        } else if (largePizza.equals(getString(R.string.new_york_meatzza))) {
-//            setPriceFromType(21.99);
-//        } else if (largePizza.equals(getString(R.string.new_york_buildyourown))) {
-//            setPriceFromType(12.99+grabPriceFromActiveToppings());
-//        }
-//    }
-//
-//    /**
-//     * if the pizza is small, set the price
-//     * @param smallPizza the selected pizza size (small)
-//     */
-//    private void priceForSmallPizza(String smallPizza) {
-//        if (smallPizza.equals(getString(R.string.new_york_deluxe))) {
-//            setPriceFromType(16.99);
-//        } else if (smallPizza.equals(getString(R.string.new_york_bbq))) {
-//            setPriceFromType(14.99);
-//        } else if (smallPizza.equals(getString(R.string.new_york_meatzza))) {
-//            setPriceFromType(17.99);
-//        } else if (smallPizza.equals(getString(R.string.new_york_buildyourown))) {
-//            //grab the amount of chips selected from the chipgroup
-//            setPriceFromType(8.99+grabPriceFromActiveToppings());
-//        }
-//    }
-//
-//    /**
-//     * sets the price (text) based on the pizza size changing
-//     * @param MediumPizza the selected pizza size (medium)
-//     */
-//    private void priceForMediumPizza(String MediumPizza) {
-//        if (MediumPizza.equals(getString(R.string.new_york_deluxe))) {
-//            setPriceFromType(18.99);
-//        } else if (MediumPizza.equals(getString(R.string.new_york_bbq))) {
-//            setPriceFromType(16.99);
-//        } else if (MediumPizza.equals(getString(R.string.new_york_meatzza))) {
-//            setPriceFromType(19.99);
-//        } else if (MediumPizza.equals(getString(R.string.new_york_buildyourown))) {
-//            setPriceFromType(10.99+grabPriceFromActiveToppings());
-//        }
-//    }
-//
 
     /**
      * sets the price (text) based on the pizza type changing
