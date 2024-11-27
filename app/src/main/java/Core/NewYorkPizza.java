@@ -25,7 +25,7 @@ public class NewYorkPizza implements PizzaFactory{
         DeluxeToppings.add(Topping.GreenPeppers);
         DeluxeToppings.add(Topping.Onions);
         DeluxeToppings.add(Topping.Mushrooms);
-        Pizza DeluxePizza = new Deluxe();
+        Deluxe DeluxePizza = new Deluxe();
         DeluxePizza.setCrust(Crust.Brooklyn);
         DeluxePizza.setToppings(DeluxeToppings);
 
@@ -44,7 +44,7 @@ public class NewYorkPizza implements PizzaFactory{
         MeatzzaToppings.add(Topping.Pepperoni);
         MeatzzaToppings.add(Topping.Beef);
         MeatzzaToppings.add(Topping.Ham);
-        Pizza MeatzzaPizza = new Meatzza();
+        Meatzza MeatzzaPizza = new Meatzza();
         MeatzzaPizza.setCrust(Crust.HandTossed);
         MeatzzaPizza.setToppings(MeatzzaToppings);
 
@@ -64,7 +64,7 @@ public class NewYorkPizza implements PizzaFactory{
         BBQChickenToppings.add(Topping.GreenPeppers);
         BBQChickenToppings.add(Topping.Provolone);
         BBQChickenToppings.add(Topping.Cheddar);
-        Pizza BBQChickenPizza = new BBQ_Chicken();
+        BBQ_Chicken BBQChickenPizza = new BBQ_Chicken();
         BBQChickenPizza.setCrust(Crust.Thin);
         BBQChickenPizza.setToppings(BBQChickenToppings);
 
@@ -77,7 +77,7 @@ public class NewYorkPizza implements PizzaFactory{
      */
     @Override
     public Pizza createBuildYourOwn() {
-        Pizza BuildYourOwnPizza = new BuildYourOwn();
+        BuildYourOwn BuildYourOwnPizza = new BuildYourOwn();
         BuildYourOwnPizza.setCrust(Crust.HandTossed);
         //prices: small: 8.99, medium 10.99, large 12.99
         //+1.69 per topping. 7 max toppings

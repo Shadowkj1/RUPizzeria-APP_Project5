@@ -77,6 +77,8 @@ public abstract class Pizza {
     @NonNull
     @Override
     public String toString() {
-return "Pizza with " + crust + " crust, " + size + " size, and " + toppings + " toppings. Price: $" + String.format(Locale.getDefault(), "%.2f", price());
+        String pizzaType = this.getClass().getSimpleName();
+    return pizzaType +" Pizza with " + crust + " crust, " + size + " size, and " + toppings +
+            " toppings. Price: $" + String.format(Locale.getDefault(), "%.2f", price());
     }
 }
