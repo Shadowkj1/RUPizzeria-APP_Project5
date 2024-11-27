@@ -19,6 +19,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class RUPizzeriaMainMenu extends AppCompatActivity {
 
+    /**
+     * Method to create and setup the main menu for the Rutgers Pizzeria app
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,14 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         //What happens when you click the New York Pizza button
         sendUserToNewYorkPizza(findViewById(R.id.orderNewYorkButton));
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //also resume the video that was playing
+        setupBRoleVideo(findViewById(R.id.pizzaB_Role));
     }
 
     /**
