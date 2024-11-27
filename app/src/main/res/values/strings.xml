@@ -15,6 +15,12 @@
     <string name="new_york_buildyourown">New York Build Your Own Pizza</string>
     <string name="temp_Pizza_name">New York Deluxe Pizza</string>
     <string name="temp_crust_name">Thin</string>
+    <string name="crust_Brooklyn">Brooklyn</string>
+    <string name="crust_Thin">Thin</string>
+    <string name="crust_HandTossed">Hand-tossed</string>
+    <string name="crust_DeepDish">Deep Dish</string>
+    <string name="crust_Pan">Pan</string>
+    <string name="crust_Stuffed">Stuffed</string>
     <string name="crust_text">Crust: </string>
     <string name="toppings_BBQChicken">BBQChicken</string>
     <string name="toppings_Provolone">Provolone</string>
@@ -31,6 +37,9 @@
     <string name="pizzaSize_small">Small</string>
     <string name="pizzaSize_medium">Medium</string>
     <string name="pizzaSize_large">Large</string>
+
+
+
     <array name="pizzaSizes">
         <item>@string/pizzaSize_small</item>
         <item>@string/pizzaSize_medium</item>

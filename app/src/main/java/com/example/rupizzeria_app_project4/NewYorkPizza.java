@@ -27,6 +27,19 @@ import Utils.SingletonDataStorage;
 
 public class NewYorkPizza extends AppCompatActivity {
 
+    /**
+     * holds the current base price of the current pizza
+     */
+    private double currentBasePrice = 0.0;
+    /**
+     * holds the selected topping count
+     */
+    private int selectedToppingCount = 0;
+    /**
+     * holds the price of one topping
+     */
+    private final double toppingPrice = 1.69;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,20 +74,22 @@ public class NewYorkPizza extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //string holding the pizzatype from the spinner
                 String selectedPizza = pizzaType.getSelectedItem().toString();
+                TextView crustType = findViewById(R.id.textview_crustType);
                 if (selectedPizza.equals(getString(R.string.new_york_deluxe))) {
-                    Toast.makeText(getApplicationContext(), "Deluxe Pizza selected",
-                            Toast.LENGTH_SHORT).show();
-                    //Deselect everything that is not Deluxe
+                    //change the crust to Brooklyn
+                    crustType.setText(getString(R.string.crust_Brooklyn));
                     deluxePizzaSelectionsOnly();
                 } else if (selectedPizza.equals(getString(R.string.new_york_bbq))) {
-                    Toast.makeText(getApplicationContext(), "BBQ Pizza selected",
-                            Toast.LENGTH_SHORT).show();
+                    //change the crust to thin
+                    crustType.setText(getString(R.string.crust_Thin));
                     bbqChickenPizzaSelectionsOnly();
                 } else if (selectedPizza.equals(getString(R.string.new_york_meatzza))) {
-                    Toast.makeText(getApplicationContext(), "MEATZZA Pizza selected",
-                            Toast.LENGTH_SHORT).show();
+                    //change the crust to Hand-tossed
+                    crustType.setText(getString(R.string.crust_HandTossed));
                     meatzzaPizzaSelectionsOnly();
                 } else if (selectedPizza.equals(getString(R.string.new_york_buildyourown))) {
+                    //change the crust to Hand-tossed
+                    crustType.setText(getString(R.string.crust_HandTossed));
                     buildYourOwnPizzaSelectionsOnly();
                 }
             }
@@ -178,10 +193,6 @@ public class NewYorkPizza extends AppCompatActivity {
         }
     }
 
-    /**
-     * Enables all toppings and allows user to select toppings.
-     * Dynamically adjusts the price as toppings are added or removed, up to 7 toppings.
-     */
     public void buildYourOwnPizzaSelectionsOnly() {
         setToppingsState(new int[]{
                 R.id.toppingsChip_Sausage, R.id.toppingsChip_Pepperoni,
@@ -191,80 +202,92 @@ public class NewYorkPizza extends AppCompatActivity {
                 R.id.toppingsChip_Provolone, R.id.toppingsChip_Cheddar
         }, false, true, true);
 
-        // Set the base price based on size
+        // Initialize price for build-your-own
         Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
-        double basePrice = 0;
         if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
-            basePrice = 8.99;
+            currentBasePrice = 8.99;
         } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_medium))) {
-            basePrice = 10.99;
+            currentBasePrice = 10.99;
         } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
-            basePrice = 12.99;
+            currentBasePrice = 12.99;
         }
-        double finalBasePrice = basePrice; // Final variable for lambda compatibility
-        setPriceFromType(finalBasePrice);
-
-        // Maximum toppings allowed
-        int maxToppings = 6;
+        selectedToppingCount = 0; // Reset topping count
+        updateTotalPrice();
 
         ChipGroup toppings = findViewById(R.id.chipGroup_toppings);
         toppings.setOnCheckedStateChangeListener((group, checkedId) -> {
-            if (checkedId.size() > maxToppings) {
-                // Disable unchecked chips if the limit is exceeded
+            // Update topping count
+            selectedToppingCount = checkedId.size();
+
+            if (selectedToppingCount > 6) {
                 for (int i = 0; i < toppings.getChildCount(); i++) {
                     Chip chip = (Chip) toppings.getChildAt(i);
                     if (!chip.isChecked()) {
                         chip.setEnabled(false);
                     }
                 }
-                Toast.makeText(this, "You can only select " + (maxToppings+1) + " toppings", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You can only select 7 toppings", Toast.LENGTH_SHORT).show();
             } else {
-                // Re-enable all chips when the limit is no longer exceeded
                 for (int i = 0; i < toppings.getChildCount(); i++) {
                     Chip chip = (Chip) toppings.getChildAt(i);
                     chip.setEnabled(true);
                 }
             }
 
-            // Adjust price dynamically
-            double currentPrice = finalBasePrice + (checkedId.size() * 1.69);
-            setPriceFromType(currentPrice);
+            // Recalculate total price
+            updateTotalPrice();
         });
     }
 
 
-    /**
-     * This activates everytime the user selects a pizza size from the spinner
-     * @param view This is the view containing the pizzaSize spinner
-     */
-    public void pizzaSizeChanged(View view) {
-        //we should get the pizza size spinner
 
+    public void pizzaSizeChanged(View view) {
         Spinner pizzaSize = (Spinner) view;
         pizzaSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            //looks like I am hardcoding the prices here
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //string holding the pizzatype from the spinner
                 String selectedSize = pizzaSize.getSelectedItem().toString();
                 String selectedPizza = ((Spinner) findViewById(R.id.spinner_newYorkPizzaType))
                         .getSelectedItem().toString();
-                TextView priceView = findViewById(R.id.textview_pizza_price);
+
                 if (selectedSize.equals(getString(R.string.pizzaSize_small))) {
-                    priceForSmallPizza(selectedPizza);
+                    currentBasePrice = selectedPizza.equals(getString(R.string.new_york_buildyourown))
+                            ? 8.99 : getPredefinedPizzaPrice(selectedPizza, "small");
                 } else if (selectedSize.equals(getString(R.string.pizzaSize_medium))) {
-                    priceForMediumPizza(selectedPizza);
+                    currentBasePrice = selectedPizza.equals(getString(R.string.new_york_buildyourown))
+                            ? 10.99 : getPredefinedPizzaPrice(selectedPizza, "medium");
                 } else if (selectedSize.equals(getString(R.string.pizzaSize_large))) {
-                    priceForLargePizza(selectedPizza);
+                    currentBasePrice = selectedPizza.equals(getString(R.string.new_york_buildyourown))
+                            ? 12.99 : getPredefinedPizzaPrice(selectedPizza, "large");
                 }
+
+                // Recalculate the total price
+                updateTotalPrice();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                //do nothing
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
+    }
 
+    /**
+     * Helper method to get predefined pizza price based on size.
+     */
+    private double getPredefinedPizzaPrice(String pizzaType, String size) {
+        return switch (pizzaType) {
+            case "New York Deluxe Pizza" ->
+                    size.equals("small") ? 16.99 : size.equals("medium") ? 18.99 : 20.99;
+            case "New York BBQ Chicken Pizza" ->
+                    size.equals("small") ? 14.99 : size.equals("medium") ? 16.99 : 19.99;
+            case "New York Meatzza Pizza" ->
+                    size.equals("small") ? 17.99 : size.equals("medium") ? 19.99 : 21.99;
+            default -> 0.0;
+        };
+    }
+
+    private void updateTotalPrice() {
+        double totalPrice = currentBasePrice + (selectedToppingCount * toppingPrice);
+        setPriceFromType(totalPrice);
     }
 
 
