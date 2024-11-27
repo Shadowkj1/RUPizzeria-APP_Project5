@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="101dp">
+
+            <TextView
+                android:id="@+id/textview_pizzaName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="14dp"
+                android:text="@string/new_york_deluxe"
+                app:layout_constraintBottom_toTopOf="@+id/crustText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_PizzaToppings"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/toppings_BBQChicken"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/toppings_text"
+                app:layout_constraintTop_toBottomOf="@+id/textview_PizzaCrust" />
+
+            <TextView
+                android:id="@+id/crustText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="6dp"
+                android:text="@string/crust_text"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/toppings_text"
+                app:layout_constraintEnd_toStartOf="@+id/textview_PizzaCrust"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageview_pizzaImage"
+                app:layout_constraintTop_toBottomOf="@+id/textview_pizzaName" />
+
+            <TextView
+                android:id="@+id/toppings_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/toppings_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textview_PizzaToppings"
+                app:layout_constraintStart_toEndOf="@+id/imageview_pizzaImage"
+                app:layout_constraintTop_toBottomOf="@+id/crustText" />
+
+            <TextView
+                android:id="@+id/textview_PizzaCrust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginBottom="7dp"
+                android:text="@string/crust_Thin"
+                app:layout_constraintBottom_toTopOf="@+id/textview_PizzaToppings"
+                app:layout_constraintStart_toStartOf="@+id/toppings_text"
+                app:layout_constraintTop_toBottomOf="@+id/textview_pizzaName" />
+
+            <ImageView
+                android:id="@+id/imageview_pizzaImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/toppings_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/newyorkstyle_meatzza" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

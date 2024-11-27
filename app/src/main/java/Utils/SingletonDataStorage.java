@@ -61,7 +61,7 @@ public class SingletonDataStorage {
 
     /**
      * Setter for orderHistory
-     * @param orderHistory the OrderHistory List you want to set
+     * @param orderHistory the OrderHistoryActivityController List you want to set
      */
     public void setOrderHistory(ArrayList<Order> orderHistory) {
         this.orderHistory = orderHistory;

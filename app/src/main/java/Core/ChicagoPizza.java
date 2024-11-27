@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class ChicagoPizza implements PizzaFactory{
 //Cannot have any instance variables, static final constants, or other methods
-//the PizzaTypes can ONLY be used in this class and NewYorkPizza
+//the PizzaTypes can ONLY be used in this class and NewYorkPizzaActivityController
 //Deluxe, BBQChicken, Meatzza, BuildYourOwn
 //Pizza must be used everywhere else
 

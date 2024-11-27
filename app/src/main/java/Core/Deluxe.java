@@ -1,5 +1,7 @@
 package Core;
 
+import androidx.annotation.NonNull;
+
 /**
  * The basics of what a Deluxe Pizza should have.
  * @author Kareem
@@ -22,5 +24,11 @@ Deluxe extends Pizza {
         } else {
             return 20.99;
         }
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Deluxe Pizza" + super.toString();
     }
 }

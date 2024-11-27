@@ -56,6 +56,14 @@ public abstract class Pizza {
     }
 
     /**
+     * Getter for the crust of the pizza.
+     * @return the crust of the pizza
+     */
+    public Crust getCrust() {
+        return this.crust;
+    }
+
+    /**
      * Setter for the size of the pizza.
      * @param size the size of the pizza
      */

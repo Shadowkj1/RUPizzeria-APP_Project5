@@ -47,6 +47,8 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         sendUserToChicagoPizza(findViewById(R.id.orderChicagoButton));
         //What happens when you click the New York Pizza button
         sendUserToNewYorkPizza(findViewById(R.id.orderNewYorkButton));
+        //What happens when you click the Cart button
+        sendUserToCurrentOrder(findViewById(R.id.cart_button));
 
     }
 
@@ -67,7 +69,7 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         chicagoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RUPizzeriaMainMenu.this, ChicagoPizza.class);
+                Intent intent = new Intent(RUPizzeriaMainMenu.this, ChicagoPizzaActivityController.class);
                 startActivity(intent);
             }
         });
@@ -82,7 +84,22 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         newYorkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RUPizzeriaMainMenu.this, NewYorkPizza.class);
+                Intent intent = new Intent(RUPizzeriaMainMenu.this, NewYorkPizzaActivityController.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Method to send the user to the Current Order menu
+     * @param view the view containing the Cart button
+     */
+    private void sendUserToCurrentOrder(View view) {
+        ImageButton cartButton = (ImageButton)view;
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RUPizzeriaMainMenu.this, CurrentOrderActivityController.class);
                 startActivity(intent);
             }
         });
@@ -160,12 +177,4 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         pizzaBROLE.start();
     }
 
-
-    /**
-     //     * Simple test method for displaying a Toast window.
-     //     * @param view I dunno its just a button man
-     //     */
-//    public void buttonCLICKED(View view) {
-//        Toast.makeText(this, "Button clicked!", Toast.LENGTH_LONG).show();
-//    }
 }

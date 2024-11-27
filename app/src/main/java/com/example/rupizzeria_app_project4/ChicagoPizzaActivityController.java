@@ -14,7 +14,7 @@ import Core.Order;
 import Core.Pizza;
 import Utils.SingletonDataStorage;
 
-public class ChicagoPizza extends AppCompatActivity {
+public class ChicagoPizzaActivityController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

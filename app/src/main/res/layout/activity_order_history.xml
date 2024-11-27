@@ -5,6 +5,6 @@
     android:id="@+id/mainFragmentHolder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderHistory">
+    tools:context=".OrderHistoryActivityController">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
