@@ -3,6 +3,7 @@ package com.example.rupizzeria_app_project4;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,9 @@ import java.util.Locale;
 
 import Core.Order;
 import Core.Pizza;
+import Core.PizzaFactory;
+import Core.Size;
+import Core.Topping;
 import Utils.SingletonDataStorage;
 
 public class NewYorkPizza extends AppCompatActivity {
@@ -40,6 +44,23 @@ public class NewYorkPizza extends AppCompatActivity {
      */
     private final double toppingPrice = 1.69;
 
+    /**
+     * holds the current order
+     */
+    private ArrayList<Pizza> currentOrder;
+
+    /**
+     * holds the order history
+     */
+    private ArrayList<Order> orderHistory;
+
+    /**
+     * This method is called when the activity is first created.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +74,145 @@ public class NewYorkPizza extends AppCompatActivity {
 
         //create an instance of the SingletonDataStorage class
         SingletonDataStorage GlobalPizzaData = SingletonDataStorage.getInstance();
-        ArrayList<Pizza> currentOrder = GlobalPizzaData.getCurrentOrder();
-        ArrayList<Order> orderHistory = GlobalPizzaData.getOrderHistory();
+        currentOrder = GlobalPizzaData.getCurrentOrder();
+        orderHistory = GlobalPizzaData.getOrderHistory();
 
         //when the user selects a pizza type
         pizzaTypeChanged(findViewById(R.id.spinner_newYorkPizzaType));
         //When the user selects a pizza size
         pizzaSizeChanged(findViewById(R.id.spinner_pizzaSize));
+        //When the user clicks Add to Cart!!
+        addToCartClicked(findViewById(R.id.button_addtoCart));
     }
+
+    /**
+     * Method that adds all that is currently selected to the cart
+     * @param view
+     */
+    private void addToCartClicked(View view) {
+        Button addToCart = (Button) view;
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Create the pizza from the items on screen and add it to the cart
+                PizzaFactory pizzaFactory = new Core.NewYorkPizza();
+                //convert the size from a string to a Size enum
+                Size pizzaSize = getSizeFromSpinner(((Spinner)
+                        findViewById(R.id.spinner_pizzaSize)).getSelectedItem().toString());
+
+
+
+                if (getPizzaTypeFromSpinner().equals(getString(R.string.new_york_deluxe))) {
+                    Pizza deluxe = pizzaFactory.createDeluxe();
+                    deluxe.setSize(pizzaSize);
+                    currentOrder.add(deluxe);
+                    showPizzaAddedToast();
+
+                } else if (getPizzaTypeFromSpinner().equals(getString(R.string.new_york_bbq))) {
+                    Pizza bbq = pizzaFactory.createBBQChicken();
+                    bbq.setSize(pizzaSize);
+                    currentOrder.add(bbq);
+                    showPizzaAddedToast();
+                } else if (getPizzaTypeFromSpinner().equals(getString(R.string.new_york_meatzza))) {
+                    Pizza meatzza = pizzaFactory.createMeatzza();
+                    meatzza.setSize(pizzaSize);
+                    currentOrder.add(meatzza);
+                    showPizzaAddedToast();
+                } else if (getPizzaTypeFromSpinner().equals(getString(R.string.new_york_buildyourown))) {
+                    Pizza buildYourOwn = pizzaFactory.createBuildYourOwn();
+                    buildYourOwn.setSize(pizzaSize);
+                    //grab all of the toppings and add them to the pizza
+                    buildYourOwn.setToppings(getTheArrayOfToppings());
+                    currentOrder.add(buildYourOwn);
+                    showPizzaAddedToast();
+                }
+
+                //print all pizzas that are in the cart
+                for (Pizza pizza : currentOrder) {
+                    System.out.println(pizza);
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * show toast that a pizza has been added to the cart
+     */
+    public void showPizzaAddedToast() {
+        Toast.makeText(this, "Pizza has been added to the cart!!", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Helper method that gets all the toppings selected by the user
+     */
+    public ArrayList<Topping> getTheArrayOfToppings() {
+        ChipGroup chipGroupToppings = findViewById(R.id.chipGroup_toppings);
+        ArrayList<Topping> allSelectedToppings = new ArrayList<>();
+        for (int i = 0; i < chipGroupToppings.getChildCount(); i++) {
+            Chip chip = (Chip) chipGroupToppings.getChildAt(i);
+            if (chip.isChecked()) {
+                Topping convertedChipTopping = getToppingFromChipId(chip.getId());
+                //add the topping to the arraylist
+                allSelectedToppings.add(convertedChipTopping);
+            }
+        }
+        return allSelectedToppings;
+    }
+
+
+   /**
+ * Helper method that converts the chip id to a topping
+ */
+public Topping getToppingFromChipId(int chipId) {
+    if (chipId == R.id.toppingsChip_Sausage) {
+        return Topping.Sausage;
+    } else if (chipId == R.id.toppingsChip_Pepperoni) {
+        return Topping.Pepperoni;
+    } else if (chipId == R.id.toppingsChip_GreenPeppers) {
+        return Topping.GreenPeppers;
+    } else if (chipId == R.id.toppingsChip_Onions) {
+        return Topping.Onions;
+    } else if (chipId == R.id.toppingsChip_Mushrooms) {
+        return Topping.Mushrooms;
+    } else if (chipId == R.id.toppingsChip_BBQChicken) {
+        return Topping.BBQChicken;
+    } else if (chipId == R.id.toppingsChip_Beef) {
+        return Topping.Beef;
+    } else if (chipId == R.id.toppingsChip_Ham) {
+        return Topping.Ham;
+    } else if (chipId == R.id.toppingsChip_Provolone) {
+        return Topping.Provolone;
+    } else if (chipId == R.id.toppingsChip_Cheddar) {
+        return Topping.Cheddar;
+    } else {
+        return null;
+    }
+}
+
+
+    /**
+     * Simple helper method that converts the selected spinner value to a Size enum
+     * @param spinnerValue the value from the spinner spinner_pizzaSize
+     * @return the enum equivalent of the spinner value
+     */
+    private Size getSizeFromSpinner(String spinnerValue) {
+        return switch (spinnerValue) {
+            case "Small" -> Size.Small;
+            case "Medium" -> Size.Medium;
+            case "Large" -> Size.Large;
+            default -> null;
+        };
+    }
+
+    private String getPizzaTypeFromSpinner() {
+        return ((Spinner) findViewById(R.id.spinner_newYorkPizzaType)).getSelectedItem()
+                .toString();
+    }
+
+
 
     /**
      * This activates everytime the user selects a pizza type from the spinner
@@ -285,6 +437,9 @@ public class NewYorkPizza extends AppCompatActivity {
         };
     }
 
+    /**
+     * Updates the total price of the pizza based on the selected toppings
+     */
     private void updateTotalPrice() {
         double totalPrice = currentBasePrice + (selectedToppingCount * toppingPrice);
         setPriceFromType(totalPrice);

@@ -3,6 +3,7 @@ package Core;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Class that holds the basis of... WHAT IS A PIZZA!?
@@ -76,6 +77,6 @@ public abstract class Pizza {
     @NonNull
     @Override
     public String toString() {
-        return "Pizza with " + crust + " crust, " + size + " size, and " + toppings + " toppings. Price: $" + price();
+return "Pizza with " + crust + " crust, " + size + " size, and " + toppings + " toppings. Price: $" + String.format(Locale.getDefault(), "%.2f", price());
     }
 }
