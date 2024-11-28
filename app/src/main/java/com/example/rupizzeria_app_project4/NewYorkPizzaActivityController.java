@@ -79,6 +79,17 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
         pizzaSizeChanged(findViewById(R.id.spinner_pizzaSize));
         //When the user clicks Add to Cart!!
         addToCartClicked(findViewById(R.id.button_addtoCart));
+        //When the user clicks the back button
+        sendUserBackToMainMenu();
+    }
+
+    /**
+     * Sends the user back to the main menu
+     */
+    private void sendUserBackToMainMenu() {
+        findViewById(R.id.back_button).setOnClickListener(v -> {
+            finish();
+        });
     }
 
     /**

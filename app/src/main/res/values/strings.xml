@@ -13,6 +13,10 @@
     <string name="new_york_meatzza">New York Meatzza Pizza</string>
     <string name="new_york_bbq">New York BBQ Chicken Pizza</string>
     <string name="new_york_buildyourown">New York Build Your Own Pizza</string>
+    <string name="chicago_deluxe">Chicago Deluxe Pizza</string>
+    <string name="chicago_meatzza">Chicago Meatzza Pizza</string>
+    <string name="chicago_bbq">Chicago BBQ Chicken Pizza</string>
+    <string name="chicago_buildyourown">Chicago Build Your Own Pizza</string>
     <string name="temp_Pizza_name">New York Deluxe Pizza</string>
     <string name="temp_crust_name">Thin</string>
     <string name="crust_Brooklyn">Brooklyn</string>
@@ -60,10 +64,16 @@
         <item>@string/pizzaSize_medium</item>
         <item>@string/pizzaSize_large</item>
     </array>
-    <array name="pizzaTypes">
+    <array name="newYork_pizzaTypes">
         <item>@string/new_york_deluxe</item>
         <item>@string/new_york_meatzza</item>
         <item>@string/new_york_bbq</item>
         <item>@string/new_york_buildyourown</item>
+    </array>
+    <array name="chicago_pizzaTypes">
+        <item>@string/chicago_deluxe</item>
+        <item>@string/chicago_meatzza</item>
+        <item>@string/chicago_bbq</item>
+        <item>@string/chicago_buildyourown</item>
     </array>
 </resources>
