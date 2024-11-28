@@ -97,8 +97,6 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
                 Size pizzaSize = getSizeFromSpinner(((Spinner)
                         findViewById(R.id.spinner_pizzaSize)).getSelectedItem().toString());
 
-
-
                 if (getPizzaTypeFromSpinner().equals(getString(R.string.new_york_deluxe))) {
                     Pizza deluxe = pizzaFactory.createDeluxe();
                     deluxe.setSize(pizzaSize);
@@ -348,13 +346,16 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
      * Allows for the user to select up to 7 toppings for their pizza.
      */
     public void buildYourOwnPizzaSelectionsOnly() {
-        setToppingsState(new int[]{
+        int[] allToppingsIds = new int[]{
                 R.id.toppingsChip_Sausage, R.id.toppingsChip_Pepperoni,
                 R.id.toppingsChip_GreenPeppers, R.id.toppingsChip_Onions,
                 R.id.toppingsChip_Mushrooms, R.id.toppingsChip_BBQChicken,
                 R.id.toppingsChip_Beef, R.id.toppingsChip_Ham,
                 R.id.toppingsChip_Provolone, R.id.toppingsChip_Cheddar
-        }, false, true, true);
+        };
+
+        setToppingsState(allToppingsIds, false, true, true);
+        clearAllToppings(allToppingsIds, false);
 
         // Initialize price for build-your-own
         Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
@@ -472,11 +473,17 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
      * @param isClickable boolean determining if the chip will be clickable
      */
     private void setToppingsState(int[] chipIds, boolean isSelected, boolean isEnabled, boolean isClickable) {
+        for (int id : chipIds) {
+            Chip chip = findViewById(id);
+            chip.setSelected(isSelected);
+            chip.setClickable(isClickable);
+            chip.setEnabled(isEnabled);
+        }
+    }
+    private void clearAllToppings(int[] chipIds, boolean isChecked) {
     for (int id : chipIds) {
         Chip chip = findViewById(id);
-        chip.setSelected(isSelected);
-        chip.setClickable(isClickable);
-        chip.setEnabled(isEnabled);
+        chip.setChecked(isChecked);
     }
 }
 
