@@ -346,18 +346,8 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
      * Allows for the user to select up to 7 toppings for their pizza.
      */
     public void buildYourOwnPizzaSelectionsOnly() {
-        int[] allToppingsIds = new int[]{
-                R.id.toppingsChip_Sausage, R.id.toppingsChip_Pepperoni,
-                R.id.toppingsChip_GreenPeppers, R.id.toppingsChip_Onions,
-                R.id.toppingsChip_Mushrooms, R.id.toppingsChip_BBQChicken,
-                R.id.toppingsChip_Beef, R.id.toppingsChip_Ham,
-                R.id.toppingsChip_Provolone, R.id.toppingsChip_Cheddar
-        };
+        setBuildYourOwnToppingsChips();
 
-        setToppingsState(allToppingsIds, false, true, true);
-        clearAllToppings(allToppingsIds, false);
-
-        // Initialize price for build-your-own
         Spinner pizzaSize = findViewById(R.id.spinner_pizzaSize);
         if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_small))) {
             currentBasePrice = 8.99;
@@ -366,14 +356,12 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
         } else if (pizzaSize.getSelectedItem().toString().equals(getString(R.string.pizzaSize_large))) {
             currentBasePrice = 12.99;
         }
-        selectedToppingCount = 0; // Reset topping count
+        selectedToppingCount = 0;
         updateTotalPrice();
-
         ChipGroup toppings = findViewById(R.id.chipGroup_toppings);
         toppings.setOnCheckedStateChangeListener((group, checkedId) -> {
             // Update topping count
             selectedToppingCount = checkedId.size();
-
             if (selectedToppingCount > 6) {
                 for (int i = 0; i < toppings.getChildCount(); i++) {
                     Chip chip = (Chip) toppings.getChildAt(i);
@@ -388,12 +376,32 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
                     chip.setEnabled(true);
                 }
             }
-
             // Recalculate total price
             updateTotalPrice();
         });
     }
 
+    /**
+     * Helper method to set the state of the toppings chips for build your own pizza
+     */
+    private void setBuildYourOwnToppingsChips() {
+        int[] allToppingsIds = new int[]{
+                R.id.toppingsChip_Sausage, R.id.toppingsChip_Pepperoni,
+                R.id.toppingsChip_GreenPeppers, R.id.toppingsChip_Onions,
+                R.id.toppingsChip_Mushrooms, R.id.toppingsChip_BBQChicken,
+                R.id.toppingsChip_Beef, R.id.toppingsChip_Ham,
+                R.id.toppingsChip_Provolone, R.id.toppingsChip_Cheddar
+        };
+
+        setToppingsState(allToppingsIds, false, true, true);
+        clearAllToppings(allToppingsIds, false);
+    }
+
+    /**
+     * This activates everytime the user selects a pizza size from the spinner.
+     * Meant to update the price of the pizza based on the size selected combined with the type.
+     * @param view This is the view containing the pizzaSize spinner
+     */
     public void pizzaSizeChanged(View view) {
         Spinner pizzaSize = (Spinner) view;
         pizzaSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -402,7 +410,7 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
                 String selectedSize = pizzaSize.getSelectedItem().toString();
                 String selectedPizza = ((Spinner) findViewById(R.id.spinner_newYorkPizzaType))
                         .getSelectedItem().toString();
-
+                //checks if its build your own first, otherwise get the other pre-defined prices
                 if (selectedSize.equals(getString(R.string.pizzaSize_small))) {
                     currentBasePrice = selectedPizza.equals(getString(R.string.new_york_buildyourown))
                             ? 8.99 : getPredefinedPizzaPrice(selectedPizza, "small");

@@ -5,188 +5,288 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".NewYorkPizzaActivityController">
 
     <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:alpha=".2"
+        app:srcCompat="@drawable/newyorkcitynoon"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/pizza_size_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pizzaSize_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_pizzaSize"
+        app:layout_constraintStart_toStartOf="@+id/spinner_pizzaSize" />
+
+    <ImageView
         android:id="@+id/imageview_pizzaImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="72dp"
+        android:layout_width="201dp"
+        android:layout_height="199dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="7dp"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/pizza_image_description"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/textview_crustType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/newyorkstyle_buildyourown" />
 
     <Spinner
-        android:id="@+id/spinner_pizzaSize"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="1dp"
-        android:entries="@array/pizzaSizes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_newYorkPizzaType" />
-
-    <Spinner
         android:id="@+id/spinner_newYorkPizzaType"
-        android:entries="@array/pizzaTypes"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="302dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="52dp"
+        android:background="#50000000"
+        android:entries="@array/pizzaTypes"
         android:scrollbarSize="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pizza_size_text2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup_toppings"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_addtoCart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_pizzaSize"
-        app:layout_constraintVertical_bias="0.0">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_BBQChicken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_BBQChicken" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Provolone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Provolone" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Cheddar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Cheddar" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Beef"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Beef" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Ham"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Ham" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Sausage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Sausage" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Pepperoni"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Pepperoni" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_GreenPeppers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_GreenPeppers" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Onions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Onions" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/toppingsChip_Mushrooms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/toppings_Mushrooms" />
-    </com.google.android.material.chip.ChipGroup>
-
-    <Button
-        android:id="@+id/button_addtoCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="85dp"
-        android:text="Add to Cart!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textview_pizza_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="57dp"
-        android:editable="false"
-        android:text="@string/default_price"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/pizzaPriceText"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup_toppings" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_crustType" />
 
     <TextView
         android:id="@+id/pizzaPriceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:background="#30000000"
         android:text="@string/pizza_price"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textview_pizza_price"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/textview_pizza_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="68dp"
+        android:background="#30000000"
+        android:text="$0.00"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/pizzaPriceText"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup_toppings" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup_toppings"
+        android:layout_width="0dp"
+        android:background="#50000000"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderview_pizzaToppings">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_BBQChicken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_BBQChicken"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Provolone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Provolone"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Cheddar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Cheddar"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Beef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Beef"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Ham"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Ham"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Sausage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Sausage"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Pepperoni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Pepperoni"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_GreenPeppers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_GreenPeppers"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Onions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Onions"
+            android:textAlignment="center" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/toppingsChip_Mushrooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#20FF0000"
+            android:backgroundTint="#E8E7E7"
+            android:checkable="true"
+            android:fontFamily="monospace"
+            android:text="@string/toppings_Mushrooms"
+            android:textAlignment="center" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Spinner
+        android:id="@+id/spinner_pizzaSize"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#50000000"
+        android:entries="@array/pizzaSizes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_addtoCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/button_red"
+        android:text="Add to Cart!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/textview_crustType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="56dp"
         android:text="@string/temp_crust_name"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_newYorkPizzaType"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_pizzaImage" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginEnd="147dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/crust_text"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textview_crustType"
-        app:layout_constraintEnd_toEndOf="@+id/imageview_PIzzaView"
+        app:layout_constraintBottom_toTopOf="@+id/orderview_pizzaType_text"
+        app:layout_constraintEnd_toStartOf="@+id/textview_crustType" />
+
+    <TextView
+        android:id="@+id/orderview_pizzaType_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="74dp"
+        android:text="@string/pizza_type_text"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="sans"
+        app:layout_constraintBottom_toTopOf="@+id/pizza_size_text2"
         app:layout_constraintStart_toStartOf="@+id/spinner_newYorkPizzaType" />
+
+    <TextView
+        android:id="@+id/orderview_pizzaToppings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="@string/toppings_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/chipGroup_toppings"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_pizzaSize" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

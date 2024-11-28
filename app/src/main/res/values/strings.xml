@@ -37,6 +37,7 @@
     <string name="pizzaSize_small">Small</string>
     <string name="pizzaSize_medium">Medium</string>
     <string name="pizzaSize_large">Large</string>
+    <string name="pizzaSize_text">Pizza Size: </string>
     <string name="Subtotal_text">Subtotal: $</string>
     <string name="Tax_text">Sales Tax: $</string>
     <string name="Total_text">Order Total: $</string>
@@ -50,6 +51,8 @@
     <string name="salestax_text">Sales Tax: $</string>
     <string name="ordertotal_text">Order Total: $</string>
     <string name="orderhistory_text">Order History</string>
+    <string name="pizza_image_description">Image of a Pizza</string>
+    <string name="pizza_type_text">Pizza Type</string>
 
 
     <array name="pizzaSizes">
