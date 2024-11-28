@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import Core.Order;
 import Core.Pizza;
-import Utils.ListViewPizzaAdapter;
+import Utils.ListViewCurrentOrder;
 import Utils.SingletonDataStorage;
 
 public class CurrentOrderActivityController extends AppCompatActivity {
@@ -84,7 +84,7 @@ public class CurrentOrderActivityController extends AppCompatActivity {
                 Toast.makeText(CurrentOrderActivityController.this,
                         "No pizzas in order to add", Toast.LENGTH_LONG).show();
             } else {
-                Order order = new Order(orderHistory.size()+1,currentOrder);
+                Order order = new Order(orderHistory.size() + 1, new ArrayList<>(currentOrder));
                 orderHistory.add(order);
                 currentOrder.clear();
                 populateAndCreateListView();
@@ -114,7 +114,7 @@ public class CurrentOrderActivityController extends AppCompatActivity {
      */
     private void populateAndCreateListView() {
         ListView listView = findViewById(R.id.listview_pizzaList);
-        ListViewPizzaAdapter adapter = new ListViewPizzaAdapter(this, currentOrder);
+        ListViewCurrentOrder adapter = new ListViewCurrentOrder(this, currentOrder);
         listView.setAdapter(adapter);
 
         //on click of the list view item

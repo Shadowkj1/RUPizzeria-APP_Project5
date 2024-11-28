@@ -49,7 +49,7 @@
     <string name="default_order_value">Order#\n0</string>
     <string name="salestax_text">Sales Tax: $</string>
     <string name="ordertotal_text">Order Total: $</string>
-
+    <string name="orderhistory_text">Order History</string>
 
 
     <array name="pizzaSizes">

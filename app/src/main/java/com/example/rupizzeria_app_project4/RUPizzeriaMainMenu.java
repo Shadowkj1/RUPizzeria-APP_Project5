@@ -49,6 +49,8 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         sendUserToNewYorkPizza(findViewById(R.id.orderNewYorkButton));
         //What happens when you click the Cart button
         sendUserToCurrentOrder(findViewById(R.id.cart_button));
+        //What happens when you click the Order History button
+        sendUserToOrderHistory(findViewById(R.id.orderHistoryButton));
 
     }
 
@@ -59,6 +61,22 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         //also resume the video that was playing
         setupBRoleVideo(findViewById(R.id.pizzaB_Role));
     }
+
+    /**
+     * Method to send the user to the Order History menu
+     * @param view the view containing the Order History button
+     */
+    public void sendUserToOrderHistory(View view) {
+        Button orderHistoryButton = (Button) view;
+        orderHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RUPizzeriaMainMenu.this, OrderHistoryActivityController.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 
     /**
      * Method to send the user to the Chicago Pizza menu

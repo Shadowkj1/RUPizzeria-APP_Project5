@@ -7,10 +7,7 @@ import Core.Pizza;
 
 public class SingletonDataStorage {
     private static SingletonDataStorage instance;
-    /*
-    private ArrayList<Pizza> currentOrder = new ArrayList<Pizza>();
-    private ArrayList<Order> orderHistory = new ArrayList<Order>();
-     */
+
     private ArrayList<Pizza> currentOrder;
     private ArrayList<Order> orderHistory;
 

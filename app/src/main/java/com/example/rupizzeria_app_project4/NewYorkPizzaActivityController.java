@@ -48,10 +48,7 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
      */
     private ArrayList<Pizza> currentOrder;
 
-    /**
-     * holds the order history
-     */
-    private ArrayList<Order> orderHistory;
+
 
     /**
      * This method is called when the activity is first created.
@@ -74,7 +71,7 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
         //create an instance of the SingletonDataStorage class
         SingletonDataStorage GlobalPizzaData = SingletonDataStorage.getInstance();
         currentOrder = GlobalPizzaData.getCurrentOrder();
-        orderHistory = GlobalPizzaData.getOrderHistory();
+
 
         //when the user selects a pizza type
         pizzaTypeChanged(findViewById(R.id.spinner_newYorkPizzaType));
@@ -126,11 +123,6 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
                     currentOrder.add(buildYourOwn);
                     showPizzaAddedToast();
                 }
-
-//                //print all pizzas that are in the cart
-//                for (Pizza pizza : currentOrder) {
-//                    System.out.println(pizza.getClass().getSimpleName());
-//                }
 
             }
         });

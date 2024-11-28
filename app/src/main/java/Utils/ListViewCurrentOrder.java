@@ -17,11 +17,11 @@ import java.util.Locale;
 
 import Core.Pizza;
 
-public class ListViewPizzaAdapter extends BaseAdapter {
+public class ListViewCurrentOrder extends BaseAdapter {
     private Context context;
     private ArrayList<Pizza> pizzas;
 
-    public ListViewPizzaAdapter(Context context, ArrayList<Pizza> pizzas) {
+    public ListViewCurrentOrder(Context context, ArrayList<Pizza> pizzas) {
         this.context = context;
         this.pizzas = pizzas;
     }
