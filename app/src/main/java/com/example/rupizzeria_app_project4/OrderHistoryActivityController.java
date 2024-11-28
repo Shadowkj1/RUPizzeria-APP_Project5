@@ -50,6 +50,18 @@ public class OrderHistoryActivityController extends AppCompatActivity {
 
         //create the recycler view
         populateAndCreateRecyclerView();
+
+        //on click of back button
+        sendUserBackToMainMenu();
+    }
+
+    /**
+     * Sends the user back to the main menu
+     */
+    private void sendUserBackToMainMenu() {
+        findViewById(R.id.back_button).setOnClickListener(v -> {
+            finish();
+        });
     }
 
     /**
