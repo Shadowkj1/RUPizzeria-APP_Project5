@@ -7,13 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".CurrentOrderActivityController">
 
+    <TextView
+        android:id="@+id/helperText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/helper_text_hint2"
+        android:textAlignment="textEnd"
+        android:textColor="#999999"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/listview_pizzaList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainMenuToolbar" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainMenuToolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/button_red"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/helperText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -37,6 +54,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/back_button"
             tools:layout_editor_absoluteX="341dp" />
+
         <TextView
             android:id="@+id/textview_order_number_text"
             android:layout_width="wrap_content"
@@ -51,16 +69,18 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/extraOptionsToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="434dp"
+        android:layout_height="84dp"
 
         android:background="#80FF0000"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listview_pizzaList">
 
         <Button
             android:id="@+id/place_orders_button"
@@ -83,13 +103,12 @@
 
     <ListView
         android:id="@+id/listview_pizzaList"
-        android:layout_width="match_parent"
-        android:layout_height="655dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginBottom="18dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="27dp"
         app:layout_constraintBottom_toTopOf="@+id/extraOptionsToolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainMenuToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/helperText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,7 +47,7 @@
     <string name="Total_text">Order Total: $</string>
     <string name="order_button">Place order!!</string>
     <string name="remove_Pizza_text">Remove Pizza</string>
-    <string name="order_number">Order Number</string>
+    <string name="order_number">Order Number: </string>
     <string name="toppings_text">Toppings: </string>
     <string name="place_order">Place Order</string>
     <string name="clear_pizzas">Clear All Pizzas</string>
@@ -57,7 +57,8 @@
     <string name="orderhistory_text">Order History</string>
     <string name="pizza_image_description">Image of a Pizza</string>
     <string name="pizza_type_text">Pizza Type</string>
-
+    <string name="helper_text_hint">(Tap Here to Remove an Order)</string>
+    <string name="helper_text_hint2">(Tap on a Pizza to remove it)</string>
 
     <array name="pizzaSizes">
         <item>@string/pizzaSize_small</item>

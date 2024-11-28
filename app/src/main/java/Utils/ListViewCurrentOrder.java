@@ -45,9 +45,11 @@ public class ListViewCurrentOrder extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (position == getCount() - 1) {
-            if (convertView == null) {
+            if (convertView == null || convertView.findViewById(R.id.textview_subtotal_value) == null || convertView.findViewById(R.id.textview_salestax_value) == null || convertView.findViewById(R.id.textview_ordertotal_value) == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.order_pizza_totals_view_basic, parent, false);
             }
+
+
 
             double subTotal = 0;
             for (Pizza pizza : pizzas) {
@@ -69,7 +71,13 @@ public class ListViewCurrentOrder extends BaseAdapter {
                     "%.2f", orderTotal));
 
         } else {
-            if (convertView == null) {
+            //oh boy this is gonna be a long comparison
+            if (convertView == null || convertView.findViewById(R.id.textview_pizzaName) == null ||
+                    convertView.findViewById(R.id.pizzaSize_value) == null ||
+                    convertView.findViewById(R.id.pizza_card_price_value) == null ||
+                    convertView.findViewById(R.id.textview_PizzaCrust) == null ||
+                    convertView.findViewById(R.id.textview_PizzaToppings) == null ||
+                    convertView.findViewById(R.id.imageview_pizzaImage) == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.pizza_item_view_basic, parent, false);
             }
 
@@ -78,8 +86,10 @@ public class ListViewCurrentOrder extends BaseAdapter {
             String pizzaStyle = determineIfChicagoStyleOrNewYorkStyleText(pizzaType, pizza.getCrust());
 
             TextView pizzaName = convertView.findViewById(R.id.textview_pizzaName);
-            TextView price = convertView.findViewById(R.id.textview_PizzaToppings);
+            TextView pizzaSize = convertView.findViewById(R.id.pizzaSize_value);
+            TextView price = convertView.findViewById(R.id.pizza_card_price_value);
             TextView crust = convertView.findViewById(R.id.textview_PizzaCrust);
+            TextView toppings = convertView.findViewById(R.id.textview_PizzaToppings);
             ImageView pizzaimage = convertView.findViewById(R.id.imageview_pizzaImage);
             String pizzaString = pizzaStyle + " " + pizzaType;
 
@@ -87,6 +97,8 @@ public class ListViewCurrentOrder extends BaseAdapter {
             price.setText(String.format("$%.2f", pizza.getPrice()));
             pizzaimage.setImageResource(determineIfChicagoStyleOrNewYorkStyleImage(pizzaType, pizza.getCrust()));
             crust.setText(pizza.getCrust().toString());
+            toppings.setText(pizza.getToppings().toString());
+            pizzaSize.setText(pizza.getSize().toString());
 
         }
         return convertView;
