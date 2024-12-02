@@ -1,5 +1,7 @@
 package com.example.rupizzeria_app_project4;
 
+import static Utils.PizzaHelperMethods.determineIfChicagoStyleOrNewYorkStyleText;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -15,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+import Core.Crust;
 import Core.Order;
 import Core.Pizza;
 import Utils.ListViewCurrentOrder;
@@ -109,10 +112,16 @@ public class CurrentOrderActivityController extends AppCompatActivity {
      */
     private void clearOrder() {
         findViewById(R.id.clear_pizzas_button).setOnClickListener(v -> {
-            currentOrder.clear();
-            populateAndCreateListView();
-            Toast.makeText(CurrentOrderActivityController.this,
-                    "Order cleared", Toast.LENGTH_SHORT).show();
+            if (currentOrder.isEmpty()) {
+                Toast.makeText(CurrentOrderActivityController.this,
+                        "The order is already empty!!!", Toast.LENGTH_SHORT).show();
+            } else {
+                currentOrder.clear();
+                populateAndCreateListView();
+                Toast.makeText(CurrentOrderActivityController.this,
+                        "Order cleared", Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
 
@@ -127,8 +136,11 @@ public class CurrentOrderActivityController extends AppCompatActivity {
         //on click of the list view item
         listView.setOnItemClickListener((parent, view, position, id) -> {
             System.out.println("Position: " + position);
-            AlertDialog dialog = deleteOptionDialog(position);
-            dialog.show();
+            if (position <= currentOrder.size()-1) {
+                AlertDialog dialog = deleteOptionDialog(position);
+                dialog.show();
+            }
+
         });
     }
 
@@ -148,8 +160,10 @@ public class CurrentOrderActivityController extends AppCompatActivity {
      * @return the Alert box that will be displayed on screen.
      */
     AlertDialog deleteOptionDialog(int PizzaPosition) {
+        String pizzaType = currentOrder.get(PizzaPosition).getClass().getSimpleName();
+        Crust crustType = currentOrder.get(PizzaPosition).getCrust();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you wish to remove this Pizza from the current order?");
+        builder.setMessage("Do you wish to remove this "+ determineIfChicagoStyleOrNewYorkStyleText(pizzaType, crustType)+ " " + pizzaType +" pizza" + " (pizza #" + (PizzaPosition+1) +")"+ " from the current order?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
