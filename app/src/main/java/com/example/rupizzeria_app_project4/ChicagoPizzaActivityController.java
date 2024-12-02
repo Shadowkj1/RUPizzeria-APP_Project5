@@ -38,10 +38,6 @@ public class ChicagoPizzaActivityController extends AppCompatActivity {
      * holds the selected topping count
      */
     private int selectedToppingCount = 0;
-    /**
-     * holds the price of one topping
-     */
-    private final double toppingPrice = 1.69;
 
     /**
      * holds the current order
@@ -207,12 +203,14 @@ public class ChicagoPizzaActivityController extends AppCompatActivity {
         };
     }
 
+    /**
+     * Simple helper method that grabs the pizzatype from the spinner_chicagoPizzaType
+     * @return string that contains what was inside the spinner
+     */
     private String getPizzaTypeFromSpinner() {
         return ((Spinner) findViewById(R.id.spinner_chicagoPizzaType)).getSelectedItem()
                 .toString();
     }
-
-
 
     /**
      * This activates everytime the user selects a pizza type from the spinner
@@ -462,6 +460,7 @@ public class ChicagoPizzaActivityController extends AppCompatActivity {
      * Updates the total price of the pizza based on the selected toppings
      */
     private void updateTotalPrice() {
+        double toppingPrice = 1.69;
         double totalPrice = currentBasePrice + (selectedToppingCount * toppingPrice);
         setPriceFromType(totalPrice);
     }
@@ -500,6 +499,12 @@ public class ChicagoPizzaActivityController extends AppCompatActivity {
             chip.setEnabled(isEnabled);
         }
     }
+
+    /**
+     * helper method that makes all chips unchecked manually
+     * @param chipIds an array containing the chipids (as an int) on the screen.
+     * @param isChecked a boolean that can allow for the chips to become unchecked or checked
+     */
     private void clearAllToppings(int[] chipIds, boolean isChecked) {
         for (int id : chipIds) {
             Chip chip = findViewById(id);

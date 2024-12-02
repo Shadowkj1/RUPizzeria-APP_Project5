@@ -94,7 +94,7 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
 
     /**
      * Method that adds all that is currently selected to the cart
-     * @param view
+     * @param view the view that contains the cart image button.
      */
     private void addToCartClicked(View view) {
         Button addToCart = (Button) view;
@@ -206,6 +206,10 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
         };
     }
 
+    /**
+     * Simple helper method that grabs the pizza type from the spinner_chicagoPizzaType
+     * @return string that contains what was inside the spinner
+     */
     private String getPizzaTypeFromSpinner() {
         return ((Spinner) findViewById(R.id.spinner_newYorkPizzaType)).getSelectedItem()
                 .toString();
@@ -444,6 +448,8 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
 
     /**
      * Helper method to get predefined pizza price based on size.
+     * @param pizzaType the pizzaType that is currently selected.
+     * @param size the size of the current pizza.
      */
     private double getPredefinedPizzaPrice(String pizzaType, String size) {
         return switch (pizzaType) {
@@ -499,6 +505,12 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
             chip.setEnabled(isEnabled);
         }
     }
+
+    /**
+     * helper method that makes all chips unchecked manually
+     * @param chipIds an array containing the chipids (as an int) on the screen.
+     * @param isChecked a boolean that can allow for the chips to become unchecked or checked
+     */
     private void clearAllToppings(int[] chipIds, boolean isChecked) {
     for (int id : chipIds) {
         Chip chip = findViewById(id);

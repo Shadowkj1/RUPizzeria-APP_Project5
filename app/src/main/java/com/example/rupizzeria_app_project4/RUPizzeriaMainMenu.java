@@ -36,7 +36,6 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         //setup B-role screen
         setupBRoleVideo(findViewById(R.id.pizzaB_Role));
         //What happens when you click the OrderNow button
@@ -51,10 +50,12 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
         sendUserToCurrentOrder(findViewById(R.id.cart_button));
         //What happens when you click the Order History button
         sendUserToOrderHistory(findViewById(R.id.orderHistoryButton));
-
     }
 
-
+    /**
+     * a method that will activate once you return to a screen
+     * (in this project I specifically use this just to play the background video again)
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -76,7 +77,6 @@ public class RUPizzeriaMainMenu extends AppCompatActivity {
             }
         });
     }
-
 
     /**
      * Method to send the user to the Chicago Pizza menu

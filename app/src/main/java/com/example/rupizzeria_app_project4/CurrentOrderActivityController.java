@@ -32,6 +32,13 @@ public class CurrentOrderActivityController extends AppCompatActivity {
      */
     private ArrayList<Order> orderHistory;
 
+    /**
+     * simple default onCreate method. runs when the active view is seen/created.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +141,12 @@ public class CurrentOrderActivityController extends AppCompatActivity {
         });
     }
 
+    /**
+     * Alert dialog method that will create a confirmation screen to make sure the user
+     * wants to delete the pizza they have selected.
+     * @param PizzaPosition the position of the pizza that was selected on screen
+     * @return the Alert box that will be displayed on screen.
+     */
     AlertDialog deleteOptionDialog(int PizzaPosition) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do you wish to remove this Pizza from the current order?");
