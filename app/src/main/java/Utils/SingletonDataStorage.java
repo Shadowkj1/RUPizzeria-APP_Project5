@@ -8,11 +8,17 @@ import Core.Pizza;
 public class SingletonDataStorage {
     private static SingletonDataStorage instance;
 
+    /**
+     * Arraylist that will hold the pizzas in the current order
+     */
     private ArrayList<Pizza> currentOrder;
+    /**
+     * Arraylist that will hold all orders of pizzas for the apps runtime.
+     */
     private ArrayList<Order> orderHistory;
 
     /**
-     * Constructor for SingletonDataStorage
+     * Constructor for SingletonDataStorage. Initializes the arraylists for the first time.
      */
     private SingletonDataStorage() {
         currentOrder = new ArrayList<>();
@@ -41,42 +47,10 @@ public class SingletonDataStorage {
     }
 
     /**
-     * Setter for currentOrder
-     * @param currentOrder you want to set
-     */
-    public void setCurrentOrder(ArrayList<Pizza> currentOrder) {
-        this.currentOrder = currentOrder;
-    }
-
-    /**
      * Getter for orderHistory
      * @return orderHistory The orderHistory containing all the orders made
      */
     public ArrayList<Order> getOrderHistory() {
         return orderHistory;
-    }
-
-    /**
-     * Setter for orderHistory
-     * @param orderHistory the OrderHistoryActivityController List you want to set
-     */
-    public void setOrderHistory(ArrayList<Order> orderHistory) {
-        this.orderHistory = orderHistory;
-    }
-
-    /**
-     * Method to add a pizza to the current order
-     * @param pizza The pizza you want to add to the order
-     */
-    public void addPizzaToOrder(Pizza pizza) {
-        currentOrder.add(pizza);
-    }
-
-    /**
-     * Method to add an order to the order history
-     * @param order The order you want to add to the order history
-     */
-    public void addOrder(Order order) {
-        orderHistory.add(order);
     }
 }

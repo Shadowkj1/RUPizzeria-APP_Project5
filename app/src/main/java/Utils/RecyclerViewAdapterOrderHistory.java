@@ -19,39 +19,54 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rupizzeria_app_project4.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import Core.Order;
 import Core.Pizza;
 
 public class RecyclerViewAdapterOrderHistory extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    /**
+     * an arraylist containing the order card + the pizzas themselves
+     */
     private final ArrayList<Object> items; // Combines Orders and their Pizzas
+    /**
+     * the context of the old view
+     */
     private final Context context;
 
-    // View Types for Order and Pizza
+    /**
+     * int that determines of a card will be a order info card
+     */
     private static final int VIEW_TYPE_ORDER = 0;
+    /**
+     * int that determines of a card will be a pizza card
+     */
     private static final int VIEW_TYPE_PIZZA = 1;
 
-    // Constructor that prepares a combined list of Orders and their Pizzas
+    /**
+     * Constructor for the RecyclerView
+     * @param orderHistory The arraylist containing all of the orders so far
+     * @param context The context of the old view
+     */
     public RecyclerViewAdapterOrderHistory(ArrayList<Order> orderHistory, Context context) {
         this.context = context;
         this.items = new ArrayList<>();
-        SingletonDataStorage GlobalPizzaData = SingletonDataStorage.getInstance();
-        orderHistory = GlobalPizzaData.getOrderHistory();
 
         // Flatten orders and pizzas into one list
         for (Order order : orderHistory) {
             items.add(order); // Add the Order object
             items.addAll(order.getPizzas()); // Add all associated Pizza objects
         }
-        for (Object item : items) {
-            System.out.println("This is an item!!! :" +item);
-        }
-        System.out.println("This is the size of the items array: " + items.size());
-        System.out.println("This is the size of the orderHistory array: " + orderHistory.size());
-        System.out.println("This is the size of the pizzas array: " + orderHistory.get(0).getPizzas().size());
     }
 
+    /**
+     * Determine if the resulting card that will be displayed next will be a Pizza card or an Order
+     * card
+     * @param position position to query
+     * @return the int of either the decision of order card (VIEW_TYPE_ORDER) or pizza card
+     * (VIEW_TYPE_PIZZA).
+     */
     @Override
     public int getItemViewType(int position) {
         if (items.get(position) instanceof Order) {
@@ -62,11 +77,24 @@ public class RecyclerViewAdapterOrderHistory extends RecyclerView.Adapter<Recycl
         throw new IllegalStateException("Unknown item type at position " + position);
     }
 
+    /**
+     * simple method that grabs the count/size of the items list
+     * @return the size as an int
+     */
     @Override
     public int getItemCount() {
         return items.size();
     }
 
+    /**
+     *  The onCreate method for ViewHolders. determines which ViewHolder should be displayed when
+     *  called.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return The Viewholder of the calculated type. order or pizza
+     */
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -80,58 +108,90 @@ public class RecyclerViewAdapterOrderHistory extends RecyclerView.Adapter<Recycl
         }
     }
 
+    /**
+     *  Method that determines the actions that should happen to the view upon its creation on the
+     *  screen. so moments after its creation.
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @SuppressLint({"DefaultLocale", "NotifyDataSetChanged", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         // Handle binding based on item type
         if (holder instanceof OrderViewHolder orderHolder) {
-            Order order = (Order) items.get(position);
-
-            orderHolder.orderNumberText.setText(Integer.toString(order.getNumber()));
-
-            // Calculate the total price for the order
-            double totalPrice = 0.0;
-            for (Pizza pizza : order.getPizzas()) {
-                totalPrice += pizza.getPrice();
-            }
-
-            orderHolder.orderTotalText.setText(String.format("%.2f", totalPrice));
-
-            orderHolder.itemView.setOnClickListener(v -> {
-                new AlertDialog.Builder(context)
-                        .setTitle("Cancel Order")
-                        .setMessage("Do you wish to cancel this order?")
-                        .setPositiveButton("Yes", (dialog, which) -> {
-                            // Remove order and all its pizzas
-                            int start = items.indexOf(order);
-                            int end = start + order.getPizzas().size() + 1; // +1 for the order itself
-                            items.subList(start, end).clear();
-                            notifyDataSetChanged(); // Refresh RecyclerView
-                            Toast.makeText(context, "Order #" + order.getNumber()
-                                    + " canceled", Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-            });
+            createTheOrderCard(position, orderHolder);
 
         } else if (holder instanceof PizzaViewHolder pizzaHolder) {
-            Pizza pizza = (Pizza) items.get(position); // Cast item to Pizza
-            String pizzaType = pizza.getClass().getSimpleName();
-            String pizzaStyle = determineIfChicagoStyleOrNewYorkStyleText(
-                    pizzaType, pizza.getCrust());
-            String newPizzaName = pizzaType + " " + pizzaStyle;
-
-            pizzaHolder.pizzaName.setText(newPizzaName);
-            pizzaHolder.pizzaPrice.setText(String.format("$%.2f", pizza.getPrice()));
-            pizzaHolder.pizzaCrust.setText(pizza.getCrust().toString());
-            pizzaHolder.pizzaToppings.setText(pizza.getToppings().toString());
-            pizzaHolder.pizzaImage.setImageResource(determineIfChicagoStyleOrNewYorkStyleImage(
-                    pizza.getClass().getSimpleName(), pizza.getCrust()));
-            pizzaHolder.pizzaSize.setText(pizza.getSize().toString());
+            createThePizzaCard(position, pizzaHolder);
         }
     }
 
-    // ViewHolder for Order Card
+    /**
+     * Helper method for onBindViewHolder that holds the logic for what the order card does
+     * after creation
+     * @param position The position of the item within the adapter's data set
+     * @param orderHolder The view/scene that contains all of the UI we need to access.
+     *                    The order card UI
+     */
+    @SuppressLint({"SetTextI18n", "DefaultLocale", "NotifyDataSetChanged"})
+    private void createTheOrderCard(int position, OrderViewHolder orderHolder) {
+        Order order = (Order) items.get(position);
+
+        orderHolder.orderNumberText.setText(Integer.toString(order.getNumber()));
+
+        // Calculate the total price for the order
+        double totalPrice = 0.0;
+        for (Pizza pizza : order.getPizzas()) {
+            totalPrice += pizza.getPrice();
+        }
+
+        orderHolder.orderTotalText.setText(String.format(Locale.US,"%.2f", totalPrice));
+
+        orderHolder.itemView.setOnClickListener(v -> {
+            new AlertDialog.Builder(context)
+                    .setTitle("Cancel Order Confirmation")
+                    .setMessage("Do you wish to cancel this order (Order #" + (position+1) + ")?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Remove order and all its pizzas
+                        int start = items.indexOf(order);
+                        int end = start + order.getPizzas().size() + 1; // +1 for the order itself
+                        items.subList(start, end).clear();
+                        notifyDataSetChanged(); // Refresh RecyclerView
+                        Toast.makeText(context, "Order #" + order.getNumber()
+                                + " canceled", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
+    }
+
+    /**
+     * Helper method for onBindViewHolder that holds the logic for what the pizza card does after
+     * creation
+     * @param position position of the active pizza/item in the arraylist.
+     * @param pizzaHolder The view/scene that contains all of the UI we need to access. The pizza
+     *                    card UI
+     */
+    private void createThePizzaCard(int position, PizzaViewHolder pizzaHolder) {
+        Pizza pizza = (Pizza) items.get(position); // Cast item to Pizza
+        String pizzaType = pizza.getClass().getSimpleName();
+        String pizzaStyle = determineIfChicagoStyleOrNewYorkStyleText(
+                pizzaType, pizza.getCrust());
+        String newPizzaName = pizzaType + " " + pizzaStyle;
+
+        pizzaHolder.pizzaName.setText(newPizzaName);
+        pizzaHolder.pizzaPrice.setText(String.format(Locale.US, "$%.2f", pizza.getPrice()));
+        pizzaHolder.pizzaCrust.setText(pizza.getCrust().toString());
+        pizzaHolder.pizzaToppings.setText(pizza.getToppings().toString());
+        pizzaHolder.pizzaImage.setImageResource(determineIfChicagoStyleOrNewYorkStyleImage(
+                pizza.getClass().getSimpleName(), pizza.getCrust()));
+        pizzaHolder.pizzaSize.setText(pizza.getSize().toString());
+    }
+
+    /**
+     * Grabs the values for the order card
+     */
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView orderNumberText, orderTotalText;
 
@@ -142,12 +202,12 @@ public class RecyclerViewAdapterOrderHistory extends RecyclerView.Adapter<Recycl
         }
     }
 
-    // ViewHolder for Pizza Item
+    /**
+     * Grabs the values for the pizza card
+     */
     public static class PizzaViewHolder extends RecyclerView.ViewHolder {
         TextView pizzaName, pizzaPrice, pizzaCrust, pizzaToppings,pizzaSize;
         ImageView pizzaImage;
-        String pizzaStyle,pizzaType;
-
         public PizzaViewHolder(@NonNull View itemView) {
             super(itemView);
             pizzaName = itemView.findViewById(R.id.textview_pizzaName);

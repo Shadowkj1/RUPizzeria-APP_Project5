@@ -4,6 +4,9 @@ import com.example.rupizzeria_app_project4.R;
 
 import Core.Crust;
 
+/**
+ * Class created to hold those methods that I use more than once in other classes.
+ */
 public class PizzaHelperMethods {
 
     /**
@@ -31,6 +34,12 @@ public class PizzaHelperMethods {
         };
     }
 
+    /**
+     * Determines if the pizza is a chicago or new york depending purely on the crust and pizza type
+     * @param pizzaType pizza type of the pizza we are trying to determine
+     * @param crust the crust type of the pizza we are trying to determine
+     * @return the pizza type we have deduced through the crust and pizza type
+     */
     public static String determineIfChicagoStyleOrNewYorkStyleText(String pizzaType, Crust crust){
         //convert crust to a string
         String crustString = crust.toString();
