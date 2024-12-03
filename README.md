@@ -8,3 +8,5 @@ My recommendation is to use Android Studio's built in Emulator, or use an actual
 
 ## Primary Phone
 I only used the emulator for testing this application. The phone that was used for testing was the **Pixel 3a XL API 34** (Android 14.0 ("UpsideDownCake")
+
+You will also want to clone from the "Easy Path" Branch. That has the latest code.
