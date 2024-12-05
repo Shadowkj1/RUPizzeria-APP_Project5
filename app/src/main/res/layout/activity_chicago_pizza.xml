@@ -140,11 +140,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_BBQChicken"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+             />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Provolone"
@@ -152,11 +150,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Provolone"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+             />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Cheddar"
@@ -164,11 +160,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Cheddar"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Beef"
@@ -176,11 +170,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Beef"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+             />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Ham"
@@ -188,11 +180,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Ham"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+             />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Sausage"
@@ -200,12 +190,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Sausage"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:checkedIconTint="#FF0000"
-            app:rippleColor="#EDC0C0" />
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Pepperoni"
@@ -213,11 +200,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Pepperoni"
-            android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+            android:textAlignment="center" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_GreenPeppers"
@@ -225,11 +209,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_GreenPeppers"
-            android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+            android:textAlignment="center" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Onions"
@@ -237,11 +218,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Onions"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/toppingsChip_Mushrooms"
@@ -249,12 +228,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:checkable="true"
-            android:fontFamily="serif"
             android:text="@string/toppings_Mushrooms"
             android:textAlignment="center"
-            android:textColor="#303030"
-            app:rippleColor="#EDC0C0" />
-
+           />
     </com.google.android.material.chip.ChipGroup>
 
     <Spinner
