@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F5F5F5"> <!-- Added a light background color -->
+    android:background="#F5F5F5">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"> <!-- Added padding inside the card -->
+            android:padding="12dp">
 
             <ImageView
                 android:id="@+id/imageview_pizzaImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:background="#E0E0E0"
+                android:contentDescription="@string/empty_space_value"
                 android:padding="4dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +52,7 @@
                 android:id="@+id/pizza_card_price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price:"
+                android:text="@string/price_text"
                 android:textColor="#666666"
                 app:layout_constraintEnd_toStartOf="@+id/pizza_card_price_value"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
-                android:text="Crust:"
+                android:text="@string/crust_text"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/imageview_pizzaImage"
@@ -91,12 +92,12 @@
                 app:layout_constraintTop_toTopOf="@+id/crustText" />
 
             <TextView
-                android:id="@+id/crustText"
+                android:id="@+id/notcrustText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
-                android:text="Crust:"
+                android:text="@string/empty_space_value"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/imageview_pizzaImage"
@@ -130,8 +131,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="32dp"
-                android:text="Toppings:"
+                android:layout_marginTop="28dp"
+                android:text="@string/toppings_text"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/imageview_pizzaImage"
@@ -139,14 +140,14 @@
 
             <TextView
                 android:id="@+id/textview_PizzaToppings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="191dp"
+                android:layout_height="51dp"
                 android:layout_marginStart="8dp"
                 android:ellipsize="end"
-                android:maxLines="2"
+                android:maxLines="4"
                 android:text="@string/toppings_BBQChicken"
                 android:textColor="#333333"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/toppings_text"
                 app:layout_constraintTop_toTopOf="@+id/toppings_text" />

@@ -14,7 +14,7 @@
         android:layout_marginBottom="20dp"
         android:text="@string/helper_text_hint2"
         android:textAlignment="textEnd"
-        android:textColor="#999999"
+        android:textColor="#3B3838"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/listview_pizzaList"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:backgroundTint="@color/button_red"
             android:text="@string/place_order" />
 
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
             android:backgroundTint="@color/button_red"
             android:text="@string/clear_pizzas" />
     </androidx.appcompat.widget.Toolbar>

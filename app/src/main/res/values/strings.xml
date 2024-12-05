@@ -6,6 +6,7 @@
     <string name="chicago_pizza">Chicago Pizza</string>
     <string name="pizzeria_name">RUPizzeria</string>
     <string name="shopping_cart">Shopping Cart</string>
+    <string name="add_to_cart_button">Add to Cart!!</string>
     <string name="back_button">Back</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_york_pizza_gallery">New York Pizza Options!</string>
@@ -37,7 +38,7 @@
     <string name="toppings_Onions">Onions</string>
     <string name="toppings_Mushrooms">Mushrooms</string>
     <string name="pizza_price">Pizza Price $</string>
-    <string name="default_price">0.00</string>
+    <string name="default_price">$0.00</string>
     <string name="pizzaSize_small">Small</string>
     <string name="pizzaSize_medium">Medium</string>
     <string name="pizzaSize_large">Large</string>
@@ -59,6 +60,8 @@
     <string name="pizza_type_text">Pizza Type</string>
     <string name="helper_text_hint">(Tap Here to Remove an Order)</string>
     <string name="helper_text_hint2">(Tap on a Pizza to remove it)</string>
+    <string name="empty_space_value"> </string>
+    <string name="price_text">Price: </string>
 
     <array name="pizzaSizes">
         <item>@string/pizzaSize_small</item>

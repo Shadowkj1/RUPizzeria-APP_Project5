@@ -53,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ordersButton" />
-<!--orderChicagoButton-->
+
     <Button
         android:id="@+id/orderChicagoButton"
         android:layout_width="175dp"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pizzaB_Role"
         app:layout_constraintVertical_bias="0.464" />
-<!--orderNewYorkButton-->
+
     <Button
         android:id="@+id/orderNewYorkButton"
         android:layout_width="175dp"

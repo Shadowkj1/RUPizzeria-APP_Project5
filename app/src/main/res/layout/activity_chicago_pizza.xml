@@ -48,6 +48,7 @@
         android:id="@+id/beanview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/empty_space_value"
         android:alpha=".4"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +118,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginBottom="36dp"
         android:background="#30000000"
-        android:text="$0.00"
+        android:text="@string/default_price"
         android:textColor="#090909"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -255,7 +256,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="28dp"
         android:backgroundTint="@color/button_red"
-        android:text="Add to Cart!"
+        android:text="@string/add_to_cart_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

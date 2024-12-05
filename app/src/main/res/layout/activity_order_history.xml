@@ -9,11 +9,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainMenuToolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/button_red"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -42,10 +44,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderHistoryRecyclerView"
-        android:layout_width="434dp"
+        android:layout_width="0dp"
         android:layout_height="738dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-2dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
