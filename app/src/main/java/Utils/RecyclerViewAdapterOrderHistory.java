@@ -148,10 +148,11 @@ public class RecyclerViewAdapterOrderHistory extends RecyclerView.Adapter<Recycl
 
         orderHolder.orderTotalText.setText(String.format(Locale.US,"%.2f", totalPrice));
 
+        // an onclick for when you click on the order card (to delete the order from the list)
         orderHolder.itemView.setOnClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Cancel Order Confirmation")
-                    .setMessage("Do you wish to cancel this order (Order #" + (position+1) + ")?")
+                    .setMessage("Do you wish to cancel this order (Order #" + (order.getNumber()) + ")?")
                     .setPositiveButton("Yes", (dialog, which) -> {
                         // Remove order and all its pizzas
                         int start = items.indexOf(order);
