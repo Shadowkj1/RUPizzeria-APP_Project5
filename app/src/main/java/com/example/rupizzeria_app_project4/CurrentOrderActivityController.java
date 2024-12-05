@@ -134,7 +134,6 @@ public class CurrentOrderActivityController extends AppCompatActivity {
 
         //on click of the list view item
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            System.out.println("Position: " + position);
             if (position <= currentOrder.size()-1) {
                 AlertDialog dialog = deleteOptionDialog(position);
                 dialog.show();

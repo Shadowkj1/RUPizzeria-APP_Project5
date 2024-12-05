@@ -110,7 +110,7 @@ public class ChicagoPizzaActivityController extends AppCompatActivity {
                     deluxe.setSize(pizzaSize);
                     currentOrder.add(deluxe);
                     showPizzaAddedToast();
-                    System.out.println(deluxe);
+
                 } else if (getPizzaTypeFromSpinner().equals(getString(R.string.chicago_bbq))) {
                     Pizza bbq = pizzaFactory.createBBQChicken();
                     bbq.setSize(pizzaSize);

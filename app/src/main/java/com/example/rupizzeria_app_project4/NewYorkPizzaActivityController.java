@@ -113,7 +113,6 @@ public class NewYorkPizzaActivityController extends AppCompatActivity {
                     deluxe.setSize(pizzaSize);
                     currentOrder.add(deluxe);
                     showPizzaAddedToast();
-                    System.out.println(deluxe);
                 } else if (getPizzaTypeFromSpinner().equals(getString(R.string.new_york_bbq))) {
                     Pizza bbq = pizzaFactory.createBBQChicken();
                     bbq.setSize(pizzaSize);
