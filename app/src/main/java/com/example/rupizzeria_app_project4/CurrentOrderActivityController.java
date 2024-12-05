@@ -116,10 +116,9 @@ public class CurrentOrderActivityController extends AppCompatActivity {
                 Toast.makeText(CurrentOrderActivityController.this,
                         "The order is already empty!!!", Toast.LENGTH_SHORT).show();
             } else {
-                currentOrder.clear();
-                populateAndCreateListView();
-                Toast.makeText(CurrentOrderActivityController.this,
-                        "Order cleared", Toast.LENGTH_SHORT).show();
+                //Make the alert dialog for clearing
+                AlertDialog clearConfirmation = clearAllPizzasAlertConfirmation();
+                clearConfirmation.show();
             }
 
         });
@@ -163,7 +162,9 @@ public class CurrentOrderActivityController extends AppCompatActivity {
         String pizzaType = currentOrder.get(PizzaPosition).getClass().getSimpleName();
         Crust crustType = currentOrder.get(PizzaPosition).getCrust();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you wish to remove this "+ determineIfChicagoStyleOrNewYorkStyleText(pizzaType, crustType)+ " " + pizzaType +" pizza" + " (pizza #" + (PizzaPosition+1) +")"+ " from the current order?");
+        builder.setMessage("Do you wish to remove this "+ determineIfChicagoStyleOrNewYorkStyleText(
+                pizzaType, crustType)+ " " + pizzaType +" pizza" +
+                " (pizza #" + (PizzaPosition+1) +")"+ " from the current order?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -184,4 +185,27 @@ public class CurrentOrderActivityController extends AppCompatActivity {
         });
         return builder.create();
     }
+
+    /**
+     * Alert dialog for clearing all of the pizzas
+     * @return the Alert box that will be displayed on screen.
+     */
+    AlertDialog clearAllPizzasAlertConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you wish to clear all of the orders?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                currentOrder.clear();
+                populateAndCreateListView();
+                Toast.makeText(CurrentOrderActivityController.this,
+                        "Order cleared", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        return builder.create();
+    }
+
 }
